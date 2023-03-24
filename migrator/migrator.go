@@ -80,6 +80,10 @@ func (m Migrator) FullDataTypeOf(field *schema.Field) (expr clause.Expr) {
 
 	if field.NotNull {
 		expr.SQL += " NOT NULL"
+	} else {
+		if field.DataType == "timestamp" {
+			expr.SQL += " NULL"
+		}
 	}
 
 	if field.Unique {
